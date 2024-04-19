@@ -41,7 +41,7 @@ function TabNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="star-outline"
+              name="food-apple-outline"
               size={32}
               color={color}
             />

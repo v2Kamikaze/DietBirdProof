@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import {
   DietBirdLogoImage,
   DietBirdLogoText,
@@ -14,14 +14,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 const buttons = [
   {
     text: "Nova Dieta",
-    icon: (
-      <MaterialCommunityIcons
-        name="leaf"
-        size={26}
-        color={"#314222"}
-        style={{}}
-      />
-    ),
+    icon: <MaterialCommunityIcons name="leaf" size={26} color={"#314222"} />,
   },
   {
     text: "Dietas Salvas",
