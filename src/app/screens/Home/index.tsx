@@ -1,6 +1,7 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import {
+  RoundedIconContainer,
   DietBirdLogoImage,
   DietBirdLogoText,
   HomeMenuItem,
@@ -10,51 +11,11 @@ import {
   ScreenContainer,
 } from "./styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-const buttons = [
-  {
-    text: "Nova Dieta",
-    icon: <MaterialCommunityIcons name="leaf" size={26} color={"#314222"} />,
-  },
-  {
-    text: "Dietas Salvas",
-    icon: (
-      <MaterialCommunityIcons name="content-save" size={26} color={"#314222"} />
-    ),
-  },
-  {
-    text: "Biblioteca de Alimentos",
-    icon: <MaterialCommunityIcons name="library" size={26} color={"#314222"} />,
-  },
-  {
-    text: "Lista de Compras",
-    icon: (
-      <MaterialCommunityIcons
-        name="format-list-bulleted"
-        size={26}
-        color={"#314222"}
-      />
-    ),
-  },
-  {
-    text: "Registro de Peso Corporal",
-    icon: (
-      <MaterialCommunityIcons
-        name="scale-balance"
-        size={26}
-        color={"#314222"}
-      />
-    ),
-  },
-  {
-    text: "Evolução de Peso",
-    icon: (
-      <MaterialCommunityIcons name="chart-line" size={26} color={"#314222"} />
-    ),
-  },
-];
+import { useNavigation } from "@react-navigation/native";
 
 const Home: React.FC = () => {
+  const { navigate } = useNavigation();
+
   return (
     <ScreenContainer>
       <LogoContainer>
@@ -63,20 +24,63 @@ const Home: React.FC = () => {
       </LogoContainer>
       <ScrollView>
         <HomeMenuList>
-          {buttons.map(({ text, icon }) => (
-            <HomeMenuItem key={text}>
-              <View
-                style={{
-                  backgroundColor: "#98b66e",
-                  padding: 8,
-                  borderRadius: 26,
-                }}
-              >
-                {icon}
-              </View>
-              <HomeMenuItemText>{text}</HomeMenuItemText>
-            </HomeMenuItem>
-          ))}
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons name="plus" size={26} color="#314222" />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Nova Dieta</HomeMenuItemText>
+          </HomeMenuItem>
+
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons
+                name="calendar"
+                size={26}
+                color="#314222"
+              />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Dietas Salvas</HomeMenuItemText>
+          </HomeMenuItem>
+
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons name="book" size={26} color="#314222" />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Biblioteca de Alimentos</HomeMenuItemText>
+          </HomeMenuItem>
+
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons
+                name="list-status"
+                size={26}
+                color="#314222"
+              />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Lista de Compras</HomeMenuItemText>
+          </HomeMenuItem>
+
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons
+                name="scale-balance"
+                size={26}
+                color="#314222"
+              />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Registro de Peso Corporal</HomeMenuItemText>
+          </HomeMenuItem>
+
+          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+            <RoundedIconContainer>
+              <MaterialCommunityIcons
+                name="chart-line"
+                size={26}
+                color="#314222"
+              />
+            </RoundedIconContainer>
+            <HomeMenuItemText>Evolução de Peso</HomeMenuItemText>
+          </HomeMenuItem>
         </HomeMenuList>
       </ScrollView>
     </ScreenContainer>

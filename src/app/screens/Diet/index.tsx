@@ -1,16 +1,29 @@
 import React from "react";
-import { ScreenContainer, ApplesIndicator, StackText } from "./styles";
-
-import { Ionicons } from "@expo/vector-icons";
 import {
-  Image,
-  Pressable,
-  PressableProps,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+  ScreenContainer,
+  ApplesIndicator,
+  StackText,
+  HeaderContainer,
+  RoundedIconButton,
+  HeaderTitle,
+  InfoBannerContainer,
+  InfoBannerText,
+  InfoBannerExitButton,
+  SpecieCardContainer,
+  SpecieCardImage,
+  SpecieCardTextContainer,
+  SpecieCardTitle,
+  SpecieCardSubtitle,
+  SpeciesCardList,
+  Title,
+  SpecieCardSelectButton,
+  SpecieCardSelectButtonTitle,
+} from "./styles";
+
+import { Button, Pressable, PressableProps } from "react-native";
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 type NumeredAppleProps = PressableProps & {
   number: number;
@@ -25,129 +38,117 @@ const NumeredApple: React.FC<NumeredAppleProps> = ({
   return (
     <Pressable {...rest}>
       <StackText>{number}</StackText>
-      <Ionicons
-        name="logo-apple"
+      <MaterialCommunityIcons
+        name="food-apple"
         size={48}
-        color={selected ? "green" : "#515151c1"}
+        color={selected ? "#98b66e" : "#515151c1"}
       />
     </Pressable>
   );
 };
 
-const Banner: React.FC = () => {
-  return (
-    <View style={styles.alert}>
-      <Text style={styles.alertText}>
-        Atenção: Para determinar corretamente a quantidade de alimento que a sua
-        ave necessita, é preciso levar em consideração a sua região de origem.{" "}
-      </Text>
-    </View>
-  );
+type ProgressIndicatorProps = {
+  currentValue: number;
+  onPress: (value: number) => void;
 };
 
-const SpecieCard: React.FC = () => {
-  return (
-    <View style={styles.specieCardContainer}>
-      <Image
-        source={{
-          uri: "https://blog.cobasi.com.br/wp-content/uploads/2021/04/psitacideos-capa.png",
-        }}
-        style={styles.birdImage}
-      />
-      <View style={styles.specieTextContainer}>
-        <Text style={styles.specieTextTitle}>Psitacídeos Australianos</Text>
-        <Text style={styles.specieTextSubtitle}>Oceania</Text>
-      </View>
-    </View>
-  );
-};
+const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
+  currentValue,
+  onPress,
+}) => (
+  <ApplesIndicator>
+    <NumeredApple
+      number={1}
+      selected={currentValue === 1}
+      onPress={() => onPress(1)}
+    />
+    <NumeredApple
+      number={2}
+      selected={currentValue === 2}
+      onPress={() => onPress(2)}
+    />
+    <NumeredApple
+      number={3}
+      selected={currentValue === 3}
+      onPress={() => onPress(3)}
+    />
+    <NumeredApple
+      number={4}
+      selected={currentValue === 4}
+      onPress={() => onPress(4)}
+    />
+    <NumeredApple
+      number={5}
+      selected={currentValue === 5}
+      onPress={() => onPress(5)}
+    />
+  </ApplesIndicator>
+);
 
 const Diet: React.FC = () => {
-  const [currentStage, setCurrentState] = React.useState(0);
+  const { goBack } = useNavigation();
+  const [currentStage, setCurrentStage] = React.useState(1);
+  const [closed, setClosed] = React.useState(false);
 
   return (
     <ScreenContainer>
-      <ApplesIndicator>
-        {[1, 2, 3, 4, 5].map((num, idx) => (
-          <NumeredApple
-            key={num}
-            number={num}
-            selected={currentStage === idx}
-            onTouchStart={() => setCurrentState(idx)}
-          />
-        ))}
-      </ApplesIndicator>
-      <ScrollView>
-        <Text style={styles.title}>Selecione a espécie</Text>
-        <Banner />
-        <SpecieCard />
-        <SpecieCard />
-        <SpecieCard />
-      </ScrollView>
+      <HeaderContainer>
+        <RoundedIconButton onPress={goBack}>
+          <MaterialCommunityIcons name="arrow-left" size={32} color="#314222" />
+        </RoundedIconButton>
+        <HeaderTitle>Nova dieta</HeaderTitle>
+      </HeaderContainer>
+
+      <ProgressIndicator
+        currentValue={currentStage}
+        onPress={setCurrentStage}
+      />
+
+      {!closed && (
+        <InfoBannerContainer>
+          <InfoBannerExitButton onPress={() => setClosed(!closed)}>
+            <MaterialCommunityIcons name="close" size={24} color="#98b66e" />
+          </InfoBannerExitButton>
+          <InfoBannerText>
+            Atenção: Para determinar corretamente a quantidade de alimento que a
+            sua ave necessita, é preciso levar em consideração a sua região de
+            origem.
+          </InfoBannerText>
+        </InfoBannerContainer>
+      )}
+
+      <Title>Escolha a espécie</Title>
+
+      <SpeciesCardList
+        data={Array.from({ length: 3 })}
+        showsVerticalScrollIndicator={false}
+        renderItem={() => (
+          <SpecieCardContainer>
+            <SpecieCardImage
+              source={{
+                uri: "https://www.petz.com.br/blog/wp-content/uploads/2019/03/tudo-sobre-papagaio-aves.jpg",
+              }}
+            />
+            <SpecieCardTextContainer>
+              <SpecieCardTitle>Psitacídeos Australianos</SpecieCardTitle>
+              <SpecieCardSubtitle>Oceania</SpecieCardSubtitle>
+
+              <SpecieCardSelectButton>
+                <SpecieCardSelectButtonTitle>
+                  Selecionar
+                </SpecieCardSelectButtonTitle>
+                <MaterialCommunityIcons
+                  name="check"
+                  size={24}
+                  color="#98b66e"
+                />
+              </SpecieCardSelectButton>
+            </SpecieCardTextContainer>
+          </SpecieCardContainer>
+        )}
+      />
     </ScreenContainer>
   );
 };
 
 export default Diet;
-
-const styles = StyleSheet.create({
-  textContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    gap: 8,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-  },
-
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    textAlign: "center",
-  },
-
-  alert: {
-    padding: 16,
-    backgroundColor: "#98b66e",
-    borderRadius: 8,
-    marginHorizontal: 16,
-  },
-  alertText: {
-    color: "#314222",
-    fontWeight: "600",
-  },
-  birdImage: {
-    width: 80,
-    height: 80,
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
-  },
-  specieTextContainer: {
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    padding: 16,
-  },
-  specieTextTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#314222",
-  },
-  specieTextSubtitle: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#314222CC",
-  },
-  specieCardContainer: {
-    flexDirection: "row",
-    backgroundColor: "#ffffff",
-    borderRadius: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    marginHorizontal: 16,
-    marginTop: 16,
-  },
-});
