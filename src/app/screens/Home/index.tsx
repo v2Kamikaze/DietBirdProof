@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, StatusBar } from "react-native";
 import {
   RoundedIconContainer,
   DietBirdLogoImage,
@@ -18,20 +18,21 @@ const Home: React.FC = () => {
 
   return (
     <ScreenContainer>
+      <StatusBar barStyle="dark-content" />
       <LogoContainer>
         <DietBirdLogoImage source={require("../../../../assets/logo.png")} />
         <DietBirdLogoText>DietBird</DietBirdLogoText>
       </LogoContainer>
       <ScrollView>
         <HomeMenuList>
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageOne")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons name="plus" size={26} color="#314222" />
             </RoundedIconContainer>
             <HomeMenuItemText>Nova Dieta</HomeMenuItemText>
           </HomeMenuItem>
 
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageTwo")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons
                 name="calendar"
@@ -42,14 +43,14 @@ const Home: React.FC = () => {
             <HomeMenuItemText>Dietas Salvas</HomeMenuItemText>
           </HomeMenuItem>
 
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageOne")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons name="book" size={26} color="#314222" />
             </RoundedIconContainer>
             <HomeMenuItemText>Biblioteca de Alimentos</HomeMenuItemText>
           </HomeMenuItem>
 
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageOne")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons
                 name="list-status"
@@ -60,7 +61,7 @@ const Home: React.FC = () => {
             <HomeMenuItemText>Lista de Compras</HomeMenuItemText>
           </HomeMenuItem>
 
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageOne")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons
                 name="scale-balance"
@@ -71,7 +72,7 @@ const Home: React.FC = () => {
             <HomeMenuItemText>Registro de Peso Corporal</HomeMenuItemText>
           </HomeMenuItem>
 
-          <HomeMenuItem onPress={() => navigate("NewDiet")}>
+          <HomeMenuItem onPress={() => navigate("DietStageOne")}>
             <RoundedIconContainer>
               <MaterialCommunityIcons
                 name="chart-line"

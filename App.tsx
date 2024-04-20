@@ -1,7 +1,8 @@
 import Home from "@app/screens/Home";
 import Settings from "@app/screens/Settings";
 import { NavigationContainer } from "@react-navigation/native";
-import Diet from "@app/screens/Diet";
+import DietStageOne from "@app/screens/NewDietStageOne";
+import DietStageTwo from "@app/screens/NewDietStageTwo";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "styled-components";
 
@@ -9,7 +10,8 @@ declare global {
   namespace ReactNavigation {
     export interface RootParamList {
       Home: undefined;
-      NewDiet: undefined;
+      DietStageOne: undefined;
+      DietStageTwo: undefined;
       About: undefined;
       Settings: undefined;
       Exit: undefined;
@@ -36,7 +38,8 @@ function StackNavigator() {
     <ThemeProvider theme={lightTheme}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="NewDiet" component={Diet} options={{}} />
+        <Stack.Screen name="DietStageOne" component={DietStageOne} />
+        <Stack.Screen name="DietStageTwo" component={DietStageTwo} />
         <Stack.Screen name="About" component={Settings} options={{}} />
         <Stack.Screen name="Settings" component={Settings} options={{}} />
         <Stack.Screen name="Exit" component={Settings} options={{}} />
