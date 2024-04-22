@@ -18,7 +18,7 @@ import { ProgressIndicator } from "@app/components/shared/ProgressIndicator";
 import { ScrollView, Switch } from "react-native";
 
 const DietStateTwo: React.FC = () => {
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const [currentStage, setCurrentStage] = React.useState(1);
   const [bannerClosed, setBannerClosed] = React.useState(false);
   const [switchOn, setSwitchOn] = React.useState(false);
@@ -52,7 +52,11 @@ const DietStateTwo: React.FC = () => {
           </SwitchContainer>
         </FormContainer>
 
-        <ConfirmButton onPress={() => {}}>
+        <ConfirmButton
+          onPress={() => {
+            navigate("DietStageThree");
+          }}
+        >
           <ConfirmButtonTitle>Confirmar</ConfirmButtonTitle>
         </ConfirmButton>
       </ScrollView>

@@ -1,5 +1,10 @@
 import React from "react";
-import { ScreenContainer, Title } from "./styles";
+import {
+  ButtonText,
+  RoundedIconButton,
+  ScreenContainer,
+  Title,
+} from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
 import { SpecieModal } from "./components/SpecieModal";
@@ -7,6 +12,7 @@ import { SpeciesList } from "./components/SpeciesList";
 import { InfoBanner } from "@app/components/shared/InfoBanner";
 import { Header } from "@app/components/shared/Header";
 import { ProgressIndicator } from "../../components/shared/ProgressIndicator";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DietStageOne: React.FC = () => {
   const { goBack, navigate } = useNavigation();
@@ -39,6 +45,10 @@ const DietStageOne: React.FC = () => {
         visible={modalClosed}
         onBackPress={() => setModalClosed(!modalClosed)}
       />
+
+      <RoundedIconButton onPress={() => navigate("DietStageTwo")}>
+        <ButtonText>Próxima etapa</ButtonText>
+      </RoundedIconButton>
     </ScreenContainer>
   );
 };

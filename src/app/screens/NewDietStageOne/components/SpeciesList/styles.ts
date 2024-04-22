@@ -55,4 +55,5 @@ export const SpecieCardSelectButtonTitle = styled.Text`
 
 export const SpeciesCardList = styled.FlatList`
   padding: 16px;
+  margin-bottom: 64px;
 `;
